@@ -1,6 +1,6 @@
 <?php
 $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de; 
- dbname=xxx', 'datenbanklogin', 'datenbankpasswort',
+ dbname=gettobox_user_registrierung', 'mg195', 'oy1Ein5rei',
     array('charset'=>'utf8'));
 ?>
 
@@ -13,7 +13,7 @@ $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de;
 </head>
 
 <?php
-$statement = $pdo->prepare("INSERT INTO xxx (Benutzer, Password, E-mail) 
+$statement = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Password, E-mail) 
                 VALUES (:Benutzer, :Password), :E-mail");
 
 $statement->bindParam(':Benutzer', $_POST["Benutzer"]);
