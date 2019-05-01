@@ -11,10 +11,6 @@ $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de;
     <meta charset="UTF-8">
     <title>Registrierung läuft</title>
 </head>
-<body>
-
-</body>
-</html>
 
 <?php
 $statement = $pdo->prepare("INSERT INTO xxx (Benutzer, Password, E-mail) 
@@ -23,17 +19,26 @@ $statement = $pdo->prepare("INSERT INTO xxx (Benutzer, Password, E-mail)
 $statement->bindParam(':Benutzer', $_POST["Benutzer"]);
 $statement->bindParam(':Password', $_POST["Password"]);
 $statement->bindParam(':E-mail', $_POST["E-mail"]);
-
+if ($statement -> execute()) {
+    echo "alles tight: ".$pdo -> lastInsertId();
+} else {
+    echo 'Du bist nicht Getto genug: ';
+    echo $statement ->errorInfo();
+    die();
+}
 
 ?>
 
+<body>
+
+</body>
+</html>
 
 
 
 
 
 
-<?php
 $user=$_POST["user"];
 $pw=$_POST["pw1"];
 $mail=$_POST["email"];
@@ -110,5 +115,5 @@ if ($user!="") {
     echo "Kein Benutzer angegeben";
 }
 @$db->close();
-?>
+
 // Schliessen der Datenbankverbindung
