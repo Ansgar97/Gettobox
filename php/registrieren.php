@@ -20,15 +20,21 @@ $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de;
 $statement = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Password, E-mail) 
                 VALUES (:Benutzer, :Password), :E-mail");
 
-$statement->bindParam(':Benutzer', $_POST["user"]);
-$statement->bindParam(':Password', $_POST["pw1"]);
-$statement->bindParam(':E-mail', $_POST["email"]);
-if ($statement -> execute()) {
-    echo "alles tight: ".$pdo -> lastInsertId();
-} else {
-    echo 'Du bist nicht Getto genug: ';
-    echo $statement ->errorInfo();
-    die();
+
+if (isset($_POST['submit'])) {
+    $hashPassword = password_hash($statement,PASSWORD_DEFAULT);
+
+    $statement->bindParam(':Benutzer', $_POST["benutzer"]);
+    $statement->bindParam(':Passwort', $_POST["pw1"]);
+    $statement->bindParam(':E-mail', $_POST["email"]);
+    if ($statement->execute()) {
+        echo "alles tight: " . $pdo->lastInsertId();
+    } else {
+        echo 'Du bist nicht Getto genug: ';
+        echo $statement->errorInfo();
+        die();
+    }
+
 }
 
 ?>
