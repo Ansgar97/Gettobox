@@ -1,4 +1,38 @@
----register.php---
+<?php
+$pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de; 
+ dbname=xxx', 'datenbanklogin', 'datenbankpasswort',
+    array('charset'=>'utf8'));
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrierung läuft</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<?php
+$statement = $pdo->prepare("INSERT INTO xxx (Benutzer, Password, E-mail) 
+                VALUES (:Benutzer, :Password), :E-mail");
+
+$statement->bindParam(':Benutzer', $_POST["Benutzer"]);
+$statement->bindParam(':Password', $_POST["Password"]);
+$statement->bindParam(':E-mail', $_POST["E-mail"]);
+
+
+?>
+
+
+
+
+
+
+
 <?php
 $user=$_POST["user"];
 $pw=$_POST["pw1"];
