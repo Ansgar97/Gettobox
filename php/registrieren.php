@@ -17,23 +17,29 @@ $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de;
 </html>
 
 <?php
-$statement = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Password, E-mail) 
-                VALUES (:Benutzer, :Password), :E-mail");
+$db = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Passwort, E-mail) 
+                VALUES (Benutzer, Passwort, E-mail");
+
+$pw = $_POST['pw1'];
+$bn = $_POST['benutzer'];
+$ma = $_POST['email'];
 
 
-if (isset($_POST['submit'])) {
-    $hashPassword = password_hash($statement,PASSWORD_DEFAULT);
+if (isset($_POST['registreiren'])) {
+    $hashPassword = password_hash($pw,PASSWORD_DEFAULT);
 
-    $statement->bindParam(':Benutzer', $_POST["benutzer"]);
-    $statement->bindParam(':Passwort', $_POST["pw1"]);
-    $statement->bindParam(':E-mail', $_POST["email"]);
-    if ($statement->execute()) {
-        echo "alles tight: " . $pdo->lastInsertId();
-    } else {
-        echo 'Du bist nicht Getto genug: ';
-        echo $statement->errorInfo();
-        die();
-    }
+    $db->bindParam(':Benutzer', $_POST["benutzer"]);
+    $db->bindParam(':Passwort', $_POST["pw1"]);
+    $db->bindParam(':E-mail', $_POST["email"]);
+    if ($db->execute()) {
+        echo "alles tight: " .$id=$pdo->lastInsertId();}
+    elseif (strpos($ma , "@") !==false)
+    {echo 'E-Mail falsch!';}
+    elseif ($check = mssql_free_statement("SELECT benutzer from gettobox_user_registrierung WHERE benutzer = $bn"));
+            {echo 'Benutzer exisitert bereits';}
+    else {echo 'Fehler bei der Registierung'; die(); }
+
+
 
 }
 
