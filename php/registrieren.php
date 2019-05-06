@@ -25,7 +25,7 @@ $bn = $_POST['benutzer'];
 $ma = $_POST['email'];
 
 
-if (isset($_POST['registreiren'])) {
+if (isset($_POST['registrieren'])) {
     $hashPassword = password_hash($pw,PASSWORD_DEFAULT);
 
     $db->bindParam(':Benutzer', $_POST["benutzer"]);
@@ -33,11 +33,11 @@ if (isset($_POST['registreiren'])) {
     $db->bindParam(':E-mail', $_POST["email"]);
     if ($db->execute()) {
         echo "alles tight: " .$id=$pdo->lastInsertId();}
-    elseif (strpos($ma , "@") !==false)
+    else(strpos($ma , "@") !==false)
     {echo 'E-Mail falsch!';}
     elseif ($check = mssql_free_statement("SELECT benutzer from gettobox_user_registrierung WHERE benutzer = $bn"));
-            {echo 'Benutzer exisitert bereits';}
-    else {echo 'Fehler bei der Registierung'; die(); }
+            {echo 'Benutzer existiert bereits';}
+    else {echo 'Fehler bei der Registrierung'; die(); }
 
 
 
