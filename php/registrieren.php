@@ -20,7 +20,7 @@ $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de;
 $db = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Passwort, E-mail) 
                 VALUES (Benutzer, Passwort, E-mail");
 
-$pw = $_POST['pw1'];
+$pw = $_POST['psw'];
 $bn = $_POST['benutzer'];
 $ma = $_POST['email'];
 
