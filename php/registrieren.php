@@ -35,12 +35,6 @@ if (isset($_POST['registreiren'])) {
         echo "alles tight: " .$id=$pdo->lastInsertId();}
     elseif (strpos($ma , "@") !==false)
     {echo 'E-Mail falsch!';}
-    elseif ($check = mssql_free_statement("SELECT benutzer from gettobox_user_registrierung WHERE benutzer = $bn"));
-            {echo 'Benutzer exisitert bereits';}
-    else {echo 'Fehler bei der Registierung'; die(); }
-
-
-
 }
 
 ?>
