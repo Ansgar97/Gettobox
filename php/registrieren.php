@@ -26,15 +26,21 @@ $ma = $_POST['email'];
 
 
 if (isset($_POST['registreiren'])) {
-    $hashPassword = password_hash($pw,PASSWORD_DEFAULT);
+
 
     $db->bindParam(':Benutzer', $_POST["benutzer"]);
     $db->bindParam(':Passwort', $_POST["pw1"]);
     $db->bindParam(':E-mail', $_POST["email"]);
+    $hashPassword = password_hash($pw,PASSWORD_DEFAULT);
     if ($db->execute()) {
         echo "alles tight: " .$id=$pdo->lastInsertId();}
     elseif (strpos($ma , "@") !==false)
     {echo 'E-Mail falsch!';}
+    elseif #hier Benutzername checken
+
+    else {
+        echo "Fehler bei der Registrierung";
+    }
 }
 
 ?>
