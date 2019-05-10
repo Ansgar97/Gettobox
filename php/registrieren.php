@@ -17,15 +17,21 @@ $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de;
 </html>
 
 <?php
-$db = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Passwort, E-mail) 
-                VALUES (Benutzer, Passwort, E-mail");
 
+function checkbenutzer ()
+{ $check = ('SELECT Benutzer WHERE Benutzer = $bn');
+    if ($check <= 0)
+        echo('Benutzer existiert bereits');
+}
 $pw = $_POST['pw1'];
 $bn = $_POST['benutzer'];
 $ma = $_POST['email'];
 
 
 if (isset($_POST['registreiren'])) {
+
+    $db = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Passwort, E-mail) 
+                VALUES (Benutzer, Passwort, E-mail");
 
 
     $db->bindParam(':Benutzer', $_POST["benutzer"]);
@@ -36,7 +42,8 @@ if (isset($_POST['registreiren'])) {
         echo "alles tight: " .$id=$pdo->lastInsertId();}
     elseif (strpos($ma , "@") !==false)
     {echo 'E-Mail falsch!';}
-    elseif #hier Benutzername checken
+
+    elseif ( checkbenutzer());
 
     else {
         echo "Fehler bei der Registrierung";
