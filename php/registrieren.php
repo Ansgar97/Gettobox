@@ -1,54 +1,41 @@
 <?php
+session_start();
 $pdo=new PDO('mysql:: host=mars.iuk.hdm-stuttgart.de; 
  dbname=gettobox_user_registrierung', 'mg195', 'oy1Ein5rei',
     array('charset'=>'utf8'));
-?>
+
+if($_POST["benutzername"]=='' OR$_POST["vorname"]=='' OR $_POST["nachname"]=='' OR $_POST["pw1"]== '' OR $_POST["email"]==''){
+echo ("");
+die();}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrierung läuft</title>
-</head>
-<body>
-
-</body>
-</html>
-
-<?php
-
-function checkbenutzer ()
-{ $check = ('SELECT Benutzer WHERE Benutzer = $bn');
-    if ($check <= 0)
-        echo('Benutzer existiert bereits');
-}
-$pw = $_POST['pw1'];
-$bn = $_POST['benutzer'];
+$bn = $_POST ['benutzername'];
+$vn = $_POST['vorname'];
+$nn = $_POST ['nachname'];
 $ma = $_POST['email'];
+$pw = $_POST['pw1'];
+$hpw = password_hash($pw,PASSWORD_DEFAULT);
+$cpw = $_POST ['pw2'];
 
-
-if (isset($_POST['registreiren'])) {
-
-    $db = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzer, Passwort, E-mail) 
-                VALUES (Benutzer, Passwort, E-mail");
-
-
-    $db->bindParam(':Benutzer', $_POST["benutzer"]);
-    $db->bindParam(':Passwort', $_POST["pw1"]);
-    $db->bindParam(':E-mail', $_POST["email"]);
-    $hashPassword = password_hash($pw,PASSWORD_DEFAULT);
-    if ($db->execute()) {
-        echo "alles tight: " .$id=$pdo->lastInsertId();}
-    elseif (strpos($ma , "@") !==false)
-    {echo 'E-Mail falsch!';}
-
-    elseif ( checkbenutzer());
-
-    else {
-        echo "Fehler bei der Registrierung";
-    }
+if ($pw !== $cpw) {
+    echo ("Passwörter stimmen nicht überein");
+    die();
 }
+
+if  (strpos($ma , "@") !==false) {
+echo ("E-Mail falsch!");
+die();
+}
+
+    $db = $pdo->prepare("INSERT INTO gettobox_user_registrierung (Benutzername, Vorname, Nachname, Passwort, E-mail) 
+                VALUES (:bn ,:vn, :nn, :hpw, :ma");
+
+    $db->bindParam(':Benutzername', $_POST["benutzername"]);
+    $db->bindParam(':Vorname', $_POST["vorname"]);
+    $db->bindParam(':Nachname', $_POST["nachname"]);
+    $db->bindParam(':Passwort', $_POST["hpw"]);
+    $db->bindParam(':E-mail', $_POST["email"]);
+
 
 ?>
 
