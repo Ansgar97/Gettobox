@@ -1,5 +1,5 @@
 <?php
-$pdo = mysqli_connect("mysql:: host=mars.iuk.hdm-stuttgart.de", "mg195", "oy1Ein5rei", "u-mg195");
+$pdo = mysqli_connect("mysql:: host=mars.iuk.hdm-stuttgart.de", "mg195", "oy1Ein5rei", "u-mg19 5");
 session_start();
 
 if($_POST["benutzername"]=='' OR$_POST["vorname"]=='' OR $_POST["nachname"]=='' OR $_POST["pw1"]== '' OR $_POST["email"]==''){
