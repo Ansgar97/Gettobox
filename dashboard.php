@@ -1,3 +1,12 @@
+<?php
+$alledateien = scandir('nutzer1'); //Ordner "files" auslesen
+
+foreach ($alledateien as $datei) { // Ausgabeschleife
+   echo $datei."<br />"; //Ausgabe Einzeldatei
+};
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
