@@ -1,15 +1,15 @@
 <?php
-$alledateien = scandir('nutzer1'); //Ordner "files" auslesen
+$pdo = mysqli_connect("mars.iuk.hdm-stuttgart.de", "mg195", "oy1Ein5rei", "u-mg195");
+session_start();
 
-foreach ($alledateien as $datei) { // Ausgabeschleife
-   echo $datei."<br />"; //Ausgabe Einzeldatei
-};
+
+
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -18,8 +18,17 @@ foreach ($alledateien as $datei) { // Ausgabeschleife
 <a>Upload von Dateien</a>
 <a>Download von Dateien</a>
 <h3>Deine Ordner</h3>
-<a>Ordner 1</a>
-<a>Ordner 2</a>
+
+<?php
+$alledateien = scandir('nutzer1'); //Ordner "files" auslesen
+
+foreach ($alledateien as $datei) { // Ausgabeschleife
+    echo $datei."<br />"; //Ausgabe Einzeldatei
+};
+
+?>
+
+
 
 </body>
 </html>

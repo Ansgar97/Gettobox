@@ -1,6 +1,6 @@
 <?php
-$pdo = mysqli_connect("mars.iuk.hdm-stuttgart.de", "mg195", "oy1Ein5rei", "u-mg195");
-session_start();
+$pdo = new PDO('mysql:host=mars.iuk.hdm-stuttgart.de;dbname=u-mg195', 'mg195', 'oy1Ein5rei');
+
 
 if($_POST["benutzername"]=='' OR$_POST["vorname"]=='' OR $_POST["nachname"]=='' OR $_POST["pw1"]== '' OR $_POST["email"]==''){
 echo ("Füllen sie das Formular komplett aus!");
@@ -25,14 +25,14 @@ echo ("E-Mail falsch!");
 die();
 }
 
-    $db = $pdo->prepare("INSERT INTO nutzer (Benutzername, Vorname, Nachname, Passwort, E-mail) 
-                VALUES (:bn ,:vn, :nn, :hpw, :ma");
+    $db = $pdo ->prepare("INSERT INTO nutzer (id, Benutzername, Vorname, Nachname, email, Passwort)
+                VALUES(' ',:bn ,:vn, :nn, :ma, :hpw)");
 
-    $db->bindParam(":Benutzername",$bn);
-    $db->bindParam(":Vorname",$vn);
-    $db->bindParam(":Nachname",$nn);
-    $db->bindParam(":Passwort",$hpw);
-    $db->bindParam(":E-mail",$ma);
+    $db->bindParam('Benutzername', $bn);
+    $db->bindParam('Vorname', $vn);
+    $db->bindParam('Nachname', $nn);
+    $db->bindParam('email', $ma);
+    $db->bindParam('Passwort', $hpw);
 
 
 ?>
